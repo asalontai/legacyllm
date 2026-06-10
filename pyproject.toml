@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "modelguard"
+version = "0.1.0"
+description = "Automatic model routing and deprecation handling for OpenAI, Anthropic, and Google Gemini"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Alex Salontai", email = "salontai.professional@gmail.com" }]
+keywords = ["llm", "openai", "anthropic", "gemini", "deprecation", "model-routing"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "openai>=1.0.0",
+    "anthropic>=0.20.0",
+    "google-genai>=0.1.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.urls]
+Homepage = "https://github.com/asalontai/modelguard"
+Issues = "https://github.com/asalontai/modelguard/issues"
+
+[tool.setuptools.packages.find]
+include = ["modelguard*"]
+
+[tool.setuptools.package-data]
+modelguard = ["data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
