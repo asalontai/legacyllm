@@ -60,15 +60,15 @@ def chat(model, messages, max_tokens=1024, temperature=None, system=None, stream
         return response.output_text, _usage(response)
 
     except AuthenticationError:
-        raise RuntimeError("[modelguard] OpenAI: invalid API key. Check your OPENAI_API_KEY.")
+        raise RuntimeError("[legacyllm] OpenAI: invalid API key. Check your OPENAI_API_KEY.")
     except RateLimitError:
-        raise RuntimeError("[modelguard] OpenAI: rate limit hit. Slow down requests or upgrade your plan.")
+        raise RuntimeError("[legacyllm] OpenAI: rate limit hit. Slow down requests or upgrade your plan.")
     except NotFoundError:
-        raise RuntimeError(f"[modelguard] OpenAI: model '{model}' not found. Call modelguard.params('openai') for help.")
+        raise RuntimeError(f"[legacyllm] OpenAI: model '{model}' not found. Call legacyllm.params('openai') for help.")
     except APIConnectionError:
-        raise RuntimeError("[modelguard] OpenAI: connection failed. Check your internet connection.")
+        raise RuntimeError("[legacyllm] OpenAI: connection failed. Check your internet connection.")
     except BadRequestError as e:
-        raise RuntimeError(f"[modelguard] OpenAI: bad request — {e}")
+        raise RuntimeError(f"[legacyllm] OpenAI: bad request — {e}")
 
 
 async def async_chat(model, messages, max_tokens=1024, temperature=None, system=None, stream=False, tools=None, **kwargs):
@@ -85,12 +85,12 @@ async def async_chat(model, messages, max_tokens=1024, temperature=None, system=
         return response.output_text, _usage(response)
 
     except AuthenticationError:
-        raise RuntimeError("[modelguard] OpenAI: invalid API key. Check your OPENAI_API_KEY.")
+        raise RuntimeError("[legacyllm] OpenAI: invalid API key. Check your OPENAI_API_KEY.")
     except RateLimitError:
-        raise RuntimeError("[modelguard] OpenAI: rate limit hit. Slow down requests or upgrade your plan.")
+        raise RuntimeError("[legacyllm] OpenAI: rate limit hit. Slow down requests or upgrade your plan.")
     except NotFoundError:
-        raise RuntimeError(f"[modelguard] OpenAI: model '{model}' not found. Call modelguard.params('openai') for help.")
+        raise RuntimeError(f"[legacyllm] OpenAI: model '{model}' not found. Call legacyllm.params('openai') for help.")
     except APIConnectionError:
-        raise RuntimeError("[modelguard] OpenAI: connection failed. Check your internet connection.")
+        raise RuntimeError("[legacyllm] OpenAI: connection failed. Check your internet connection.")
     except BadRequestError as e:
-        raise RuntimeError(f"[modelguard] OpenAI: bad request — {e}")
+        raise RuntimeError(f"[legacyllm] OpenAI: bad request — {e}")

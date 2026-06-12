@@ -1,17 +1,17 @@
-# modelguard
+# legacyllm
 
-Stop updating model names manually. **modelguard** automatically detects deprecated AI models and routes them to their current replacements — across OpenAI, Anthropic, and Google Gemini.
+Stop updating model names manually. **legacyllm** automatically detects deprecated AI models and routes them to their current replacements — across OpenAI, Anthropic, and Google Gemini.
 
 ```python
-import modelguard
+import legacyllm
 
-# claude-3-opus is retired — modelguard swaps it automatically
-response = modelguard.chat(
+# claude-3-opus is retired — legacyllm swaps it automatically
+response = legacyllm.chat(
     model="claude-3-opus-20240229",
     messages=[{"role": "user", "content": "Say hi"}]
 )
 
-# [modelguard] 'claude-3-opus-20240229' is deprecated, switching to 'claude-opus-4-8'
+# [legacyllm] 'claude-3-opus-20240229' is deprecated, switching to 'claude-opus-4-8'
 print(response["text"])        # Hi!
 print(response["model_used"])  # claude-opus-4-8
 print(response["was_swapped"]) # True
@@ -23,7 +23,7 @@ print(response["usage"])       # {"input_tokens": 10, "output_tokens": 4, "total
 ## Install
 
 ```bash
-pip install modelguard
+pip install legacyllm
 ```
 
 Set your API keys in a `.env` file:
@@ -41,9 +41,9 @@ GEMINI_API_KEY=...
 ### Basic
 
 ```python
-import modelguard
+import legacyllm
 
-response = modelguard.chat(
+response = legacyllm.chat(
     model="claude-opus-4-6",
     messages=[{"role": "user", "content": "Hello"}]
 )
@@ -54,7 +54,7 @@ print(response["text"])
 ### With parameters
 
 ```python
-response = modelguard.chat(
+response = legacyllm.chat(
     model="gpt-4o",
     messages=[{"role": "user", "content": "Hello"}],
     max_tokens=512,
@@ -66,7 +66,7 @@ response = modelguard.chat(
 ### Conversation history
 
 ```python
-response = modelguard.chat(
+response = legacyllm.chat(
     model="claude-opus-4-6",
     messages=[
         {"role": "user", "content": "My name is John"},
@@ -79,7 +79,7 @@ response = modelguard.chat(
 ### Streaming
 
 ```python
-for chunk in modelguard.chat(
+for chunk in legacyllm.chat(
     model="gpt-4o",
     messages=[{"role": "user", "content": "Tell me a story"}],
     stream=True
@@ -91,10 +91,10 @@ for chunk in modelguard.chat(
 
 ```python
 import asyncio
-import modelguard
+import legacyllm
 
 async def main():
-    response = await modelguard.async_chat(
+    response = await legacyllm.async_chat(
         model="gemini-2.5-flash",
         messages=[{"role": "user", "content": "Hello"}]
     )
@@ -106,7 +106,7 @@ asyncio.run(main())
 ### Tools / function calling
 
 ```python
-response = modelguard.chat(
+response = legacyllm.chat(
     model="gpt-4o",
     messages=[{"role": "user", "content": "What's the weather in NYC?"}],
     tools=[{
@@ -160,42 +160,42 @@ Every response returns the same shape regardless of provider:
 
 ```python
 # see available parameters for a provider
-modelguard.params("openai")
-modelguard.params("anthropic")
-modelguard.params("google")
+legacyllm.params("openai")
+legacyllm.params("anthropic")
+legacyllm.params("google")
 
 # list all current models
-modelguard.models()
-modelguard.models("openai")
+legacyllm.models()
+legacyllm.models("openai")
 ```
 
 ```bash
 # from the terminal
-python -m modelguard params openai
-python -m modelguard models
-python -m modelguard update
+python -m legacyllm params openai
+python -m legacyllm models
+python -m legacyllm update
 ```
 
 ---
 
 ## Keeping models up to date
 
-modelguard ships with a built-in deprecation index. To refresh it:
+legacyllm ships with a built-in deprecation index. To refresh it:
 
 ```bash
-python -m modelguard update
+python -m legacyllm update
 ```
 
-This fetches the latest models from all 3 providers, updates `modelguard/data/current_models.json`, and flags any models that have disappeared so you can update the deprecation index.
+This fetches the latest models from all 3 providers, updates `legacyllm/data/current_models.json`, and flags any models that have disappeared so you can update the deprecation index.
 
 ---
 
 ## Contributing
 
-The deprecation index (`modelguard/data/depricated.json`) needs ongoing maintenance as providers release and retire models. If you notice a missing deprecation:
+The deprecation index (`legacyllm/data/depricated.json`) needs ongoing maintenance as providers release and retire models. If you notice a missing deprecation:
 
 1. Fork the repo
-2. Add the entry to `modelguard/data/depricated.json` with `replacement` and `deprecated_on`
+2. Add the entry to `legacyllm/data/depricated.json` with `replacement` and `deprecated_on`
 3. Run `pytest` to validate
 4. Submit a pull request
 

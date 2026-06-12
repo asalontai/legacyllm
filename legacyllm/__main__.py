@@ -15,10 +15,10 @@ def main():
         from .client import params
         params(args[1] if len(args) > 1 else None)
     else:
-        print("modelguard CLI")
-        print("  python -m modelguard params [provider]   show parameters")
-        print("  python -m modelguard models [provider]   list current models")
-        print("  python -m modelguard update              refresh model lists")
+        print("legacyllm CLI")
+        print("  python -m legacyllm params [provider]   show parameters")
+        print("  python -m legacyllm models [provider]   list current models")
+        print("  python -m legacyllm update              refresh model lists")
 
 
 if __name__ == "__main__":

@@ -16,9 +16,9 @@ _PROVIDERS = {
 
 
 def models(provider: str = None):
-    """List all available current models. e.g. modelguard.models("openai")"""
+    """List all available current models. e.g. legacyllm.models("openai")"""
     if not _CURRENT_PATH.exists():
-        print("[modelguard] No current_models.json found. Run `python -m modelguard update` first.")
+        print("[legacyllm] No current_models.json found. Run `python -m legacyllm update` first.")
         return
 
     current = json.load(open(_CURRENT_PATH, encoding="utf-8"))
@@ -32,7 +32,7 @@ def models(provider: str = None):
 
     provider = provider.lower()
     if provider not in current:
-        print(f"[modelguard] Unknown provider '{provider}'. Choose from: {', '.join(current)}")
+        print(f"[legacyllm] Unknown provider '{provider}'. Choose from: {', '.join(current)}")
         return
 
     print(f"\n[{provider}]")
@@ -42,19 +42,19 @@ def models(provider: str = None):
 
 
 def params(provider: str = None):
-    """Print available parameters for a provider. e.g. modelguard.params("openai")"""
+    """Print available parameters for a provider. e.g. legacyllm.params("openai")"""
     if provider is None:
-        print("[modelguard] Available providers: openai, anthropic, google")
-        print("Usage: modelguard.params('openai')")
+        print("[legacyllm] Available providers: openai, anthropic, google")
+        print("Usage: legacyllm.params('openai')")
         return
 
     provider = provider.lower()
     if provider not in _PARAMS:
-        print(f"[modelguard] Unknown provider '{provider}'. Choose from: {', '.join(_PARAMS)}")
+        print(f"[legacyllm] Unknown provider '{provider}'. Choose from: {', '.join(_PARAMS)}")
         return
 
     width = max(len(name) for name in _PARAMS[provider]) + 2
-    print(f"\n[modelguard] Parameters for {provider}:\n")
+    print(f"\n[legacyllm] Parameters for {provider}:\n")
     for name, desc in _PARAMS[provider].items():
         print(f"  {name:<{width}} {desc}")
     print()
@@ -63,11 +63,11 @@ def params(provider: str = None):
 def _route(model):
     result = checker.check(model)
     if result["is_deprecated"]:
-        print(f"[modelguard] '{model}' is deprecated, switching to '{result['replacement']}'")
+        print(f"[legacyllm] '{model}' is deprecated, switching to '{result['replacement']}'")
         model = result["replacement"]
     provider = _PROVIDERS.get(result["provider"])
     if provider is None:
-        raise ValueError(f"[modelguard] Unknown provider for model: '{model}'. Call modelguard.params() for help.")
+        raise ValueError(f"[legacyllm] Unknown provider for model: '{model}'. Call legacyllm.params() for help.")
     return result, model, provider
 
 
@@ -89,7 +89,7 @@ def chat(model, messages, max_tokens=1024, temperature=None, system=None, stream
     Returns a dict: {text, model_used, was_swapped, original_model, usage}
     or a generator of text chunks if stream=True.
 
-    Tip: call modelguard.params("openai") to see all parameters for a provider.
+    Tip: call legacyllm.params("openai") to see all parameters for a provider.
     """
     result, model, provider = _route(model)
     response = provider.chat(model, messages, max_tokens, temperature, system, stream, tools, **kwargs)

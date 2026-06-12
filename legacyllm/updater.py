@@ -76,7 +76,7 @@ def update():
 
     with open(_CURRENT_PATH, "w", encoding="utf-8") as f:
         json.dump(new, f, indent=4)
-    print("\n[modelguard] current_models.json updated.")
+    print("\n[legacyllm] current_models.json updated.")
 
 
 if __name__ == "__main__":

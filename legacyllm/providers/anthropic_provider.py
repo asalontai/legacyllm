@@ -60,15 +60,15 @@ def chat(model, messages, max_tokens=1024, temperature=None, system=None, stream
         return response.content[0].text, _usage(response)
 
     except AuthenticationError:
-        raise RuntimeError("[modelguard] Anthropic: invalid API key. Check your ANTHROPIC_API_KEY.")
+        raise RuntimeError("[legacyllm] Anthropic: invalid API key. Check your ANTHROPIC_API_KEY.")
     except RateLimitError:
-        raise RuntimeError("[modelguard] Anthropic: rate limit hit. Slow down requests or upgrade your plan.")
+        raise RuntimeError("[legacyllm] Anthropic: rate limit hit. Slow down requests or upgrade your plan.")
     except NotFoundError:
-        raise RuntimeError(f"[modelguard] Anthropic: model '{model}' not found. Call modelguard.params('anthropic') for help.")
+        raise RuntimeError(f"[legacyllm] Anthropic: model '{model}' not found. Call legacyllm.params('anthropic') for help.")
     except APIConnectionError:
-        raise RuntimeError("[modelguard] Anthropic: connection failed. Check your internet connection.")
+        raise RuntimeError("[legacyllm] Anthropic: connection failed. Check your internet connection.")
     except BadRequestError as e:
-        raise RuntimeError(f"[modelguard] Anthropic: bad request — {e}")
+        raise RuntimeError(f"[legacyllm] Anthropic: bad request — {e}")
 
 
 async def async_chat(model, messages, max_tokens=1024, temperature=None, system=None, stream=False, tools=None, **kwargs):
@@ -85,12 +85,12 @@ async def async_chat(model, messages, max_tokens=1024, temperature=None, system=
         return response.content[0].text, _usage(response)
 
     except AuthenticationError:
-        raise RuntimeError("[modelguard] Anthropic: invalid API key. Check your ANTHROPIC_API_KEY.")
+        raise RuntimeError("[legacyllm] Anthropic: invalid API key. Check your ANTHROPIC_API_KEY.")
     except RateLimitError:
-        raise RuntimeError("[modelguard] Anthropic: rate limit hit. Slow down requests or upgrade your plan.")
+        raise RuntimeError("[legacyllm] Anthropic: rate limit hit. Slow down requests or upgrade your plan.")
     except NotFoundError:
-        raise RuntimeError(f"[modelguard] Anthropic: model '{model}' not found. Call modelguard.params('anthropic') for help.")
+        raise RuntimeError(f"[legacyllm] Anthropic: model '{model}' not found. Call legacyllm.params('anthropic') for help.")
     except APIConnectionError:
-        raise RuntimeError("[modelguard] Anthropic: connection failed. Check your internet connection.")
+        raise RuntimeError("[legacyllm] Anthropic: connection failed. Check your internet connection.")
     except BadRequestError as e:
-        raise RuntimeError(f"[modelguard] Anthropic: bad request — {e}")
+        raise RuntimeError(f"[legacyllm] Anthropic: bad request — {e}")

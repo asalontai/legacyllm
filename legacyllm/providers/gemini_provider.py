@@ -46,14 +46,14 @@ def _handle_error(e, model):
     if isinstance(e, ClientError):
         s = str(e)
         if "API_KEY" in s or "403" in s:
-            return RuntimeError("[modelguard] Google: invalid API key. Check your GEMINI_API_KEY.")
+            return RuntimeError("[legacyllm] Google: invalid API key. Check your GEMINI_API_KEY.")
         if "404" in s:
-            return RuntimeError(f"[modelguard] Google: model '{model}' not found. Call modelguard.params('google') for help.")
+            return RuntimeError(f"[legacyllm] Google: model '{model}' not found. Call legacyllm.params('google') for help.")
         if "400" in s:
-            return RuntimeError(f"[modelguard] Google: bad request — {e}")
-        return RuntimeError(f"[modelguard] Google: client error — {e}")
+            return RuntimeError(f"[legacyllm] Google: bad request — {e}")
+        return RuntimeError(f"[legacyllm] Google: client error — {e}")
     if isinstance(e, ServerError):
-        return RuntimeError(f"[modelguard] Google: server error — {e}")
+        return RuntimeError(f"[legacyllm] Google: server error — {e}")
     return None
 
 
