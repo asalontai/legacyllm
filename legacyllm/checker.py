@@ -25,6 +25,10 @@ def detect_provider(model: str) -> str | None:
         return "anthropic"
     if model.startswith("gemini-"):
         return "google"
+    if model.startswith("deepseek-"):
+        return "deepseek"
+    if model.startswith("qwen"):
+        return "qwen"
     return None
 
 

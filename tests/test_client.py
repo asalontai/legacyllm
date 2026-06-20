@@ -1,5 +1,5 @@
-import modelguard
-from modelguard.providers import anthropic_provider, openai_provider
+import legacyllm
+from legacyllm.providers import anthropic_provider, openai_provider
 
 
 def test_chat_swaps_deprecated_model(monkeypatch):
@@ -12,7 +12,7 @@ def test_chat_swaps_deprecated_model(monkeypatch):
 
     monkeypatch.setattr(anthropic_provider, "chat", fake_chat)
 
-    response = modelguard.chat(
+    response = legacyllm.chat(
         model="claude-3-opus-20240229",  # deprecated
         messages=[{"role": "user", "content": "hi"}],
     )
@@ -36,7 +36,7 @@ def test_chat_passes_active_model_through(monkeypatch):
 
     monkeypatch.setattr(openai_provider, "chat", fake_chat)
 
-    response = modelguard.chat(
+    response = legacyllm.chat(
         model="gpt-4o",
         messages=[{"role": "user", "content": "hi"}],
     )
@@ -56,7 +56,7 @@ def test_chat_forwards_params(monkeypatch):
 
     monkeypatch.setattr(openai_provider, "chat", fake_chat)
 
-    modelguard.chat(
+    legacyllm.chat(
         model="gpt-4o",
         messages=[{"role": "user", "content": "hi"}],
         max_tokens=256,
@@ -75,4 +75,4 @@ def test_unknown_model_raises():
     """A model with no detectable provider raises a clear error."""
     import pytest
     with pytest.raises(ValueError):
-        modelguard.chat(model="mystery-model-9000", messages=[{"role": "user", "content": "hi"}])
+        legacyllm.chat(model="mystery-model-9000", messages=[{"role": "user", "content": "hi"}])

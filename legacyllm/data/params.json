@@ -42,5 +42,29 @@
         "candidate_count":    "int      (default: None) - number of responses to generate",
         "presence_penalty":   "float    (default: None)",
         "frequency_penalty":  "float    (default: None)"
+    },
+    "deepseek": {
+        "model":              "str      (required) - e.g. 'deepseek-chat'",
+        "messages":           "list     (required) - [{'role': 'user', 'content': '...'}]",
+        "max_tokens":         "int      (default: 1024)",
+        "temperature":        "float    (default: None) - 0.0 to 1.0",
+        "system":             "str      (default: None) - system prompt",
+        "stream":             "bool     (default: False) - returns a generator if True",
+        "tools":              "list     (default: None) - list of tool definitions",
+        "top_p":              "float    (default: None) - nucleus sampling",
+        "frequency_penalty":  "float    (default: None)",
+        "presence_penalty":   "float    (default: None)"
+    },
+    "qwen": {
+        "model":              "str      (required) - e.g. 'qwen-plus', 'qwen-turbo'",
+        "messages":           "list     (required) - [{'role': 'user', 'content': '...'}]",
+        "max_tokens":         "int      (default: 1024)",
+        "temperature":        "float    (default: None) - 0.0 to 1.0",
+        "system":             "str      (default: None) - system instruction",
+        "stream":             "bool     (default: False) - returns a generator if True",
+        "tools":              "list     (default: None) - list of tool definitions",
+        "top_p":              "float    (default: None) - nucleus sampling",
+        "top_k":              "int      (default: None) - top-k sampling",
+        "stop_sequences":     "list     (default: None) - list of stop strings"
     }
 }

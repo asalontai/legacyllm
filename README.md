@@ -32,6 +32,8 @@ Set your API keys in a `.env` file:
 OPENAI_API_KEY=...
 ANTHROPIC_API_KEY=...
 GEMINI_API_KEY=...
+DEEPSEEK_API_KEY=...
+DASHSCOPE_API_KEY=...
 ```
 
 ---
@@ -153,6 +155,8 @@ Every response returns the same shape regardless of provider:
 | OpenAI    | gpt-*, o1, o3, o4 |
 | Anthropic | claude-*         |
 | Google    | gemini-*         |
+| Deepseek  | deepseek-*       |
+| Qwen      | qwen-*           |
 
 ---
 
