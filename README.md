@@ -167,6 +167,8 @@ Every response returns the same shape regardless of provider:
 legacyllm.params("openai")
 legacyllm.params("anthropic")
 legacyllm.params("google")
+legacyllm.params("deepseek")
+legacyllm.params("qwen")
 
 # list all current models
 legacyllm.models()
@@ -190,7 +192,7 @@ legacyllm ships with a built-in deprecation index. To refresh it:
 python -m legacyllm update
 ```
 
-This fetches the latest models from all 3 providers, updates `legacyllm/data/current_models.json`, and flags any models that have disappeared so you can update the deprecation index.
+This fetches the latest models from all 5 providers, updates `legacyllm/data/current_models.json`, and flags any models that have disappeared so you can update the deprecation index.
 
 ---
 
