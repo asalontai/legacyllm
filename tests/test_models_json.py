@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from datetime import date
 
-_DATA = Path(__file__).parent.parent / "modelguard" / "data"
+_DATA = Path(__file__).parent.parent / "legacyllm" / "data"
 with open(_DATA / "depricated.json", encoding="utf-8") as f:
     INDEX = json.load(f)
 

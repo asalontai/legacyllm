@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 from . import checker
-from .providers import openai_provider, anthropic_provider, gemini_provider
+from .providers import openai_provider, anthropic_provider, gemini_provider, deepseek_provider, qwen_provider
 
 _DATA = Path(__file__).parent / "data"
 _CURRENT_PATH = _DATA / "current_models.json"
@@ -12,6 +12,8 @@ _PROVIDERS = {
     "openai": openai_provider,
     "anthropic": anthropic_provider,
     "google": gemini_provider,
+    "deepseek": deepseek_provider,
+    "qwen": qwen_provider,
 }
 
 
@@ -44,7 +46,7 @@ def models(provider: str = None):
 def params(provider: str = None):
     """Print available parameters for a provider. e.g. legacyllm.params("openai")"""
     if provider is None:
-        print("[legacyllm] Available providers: openai, anthropic, google")
+        print("[legacyllm] Available providers: openai, anthropic, google, deepseek, qwen")
         print("Usage: legacyllm.params('openai')")
         return
 
