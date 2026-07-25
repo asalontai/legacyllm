@@ -1,0 +1,42 @@
+name: Refresh model index
+
+# Weekly job that fetches the latest models from each provider and opens a PR
+# if anything changed. Keeps the deprecation index from going stale.
+#
+# Requires these repository secrets to be set (Settings > Secrets > Actions):
+#   OPENAI_API_KEY, ANTHROPIC_API_KEY, GEMINI_API_KEY
+# Without them the fetch step will fail — set them before enabling the schedule.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # every Monday 06:00 UTC
+  workflow_dispatch: {} # allow manual runs from the Actions tab
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+      - name: Refresh current_models.json
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python -m legacyllm update
+      - name: Open PR if the index changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "chore: refresh model index"
+          title: "chore: refresh model index"
+          body: |
+            Automated weekly refresh of `current_models.json`.
+            Review the diff and add any newly-disappeared models to `deprecated.json`.
+          branch: auto/refresh-model-index
+          delete-branch: true

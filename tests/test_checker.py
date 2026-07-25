@@ -1,4 +1,4 @@
-from modelguard import checker
+from legacyllm import checker
 
 
 # --- detect_provider ---

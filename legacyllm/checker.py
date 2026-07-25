@@ -4,7 +4,7 @@ from pathlib import Path
 
 _DATA = Path(__file__).parent / "data"
 
-with open(_DATA / "depricated.json", encoding="utf-8") as f:
+with open(_DATA / "deprecated.json", encoding="utf-8") as f:
     _DEPRECATED = json.load(f)
 
 _CURRENT_PATH = _DATA / "current_models.json"

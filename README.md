@@ -1,6 +1,11 @@
 # legacyllm
 
-Stop updating model names manually. **legacyllm** automatically detects deprecated AI models and routes them to their current replacements — across OpenAI, Anthropic, and Google Gemini.
+[![PyPI version](https://img.shields.io/pypi/v/legacyllm.svg)](https://pypi.org/project/legacyllm/)
+[![Python versions](https://img.shields.io/pypi/pyversions/legacyllm.svg)](https://pypi.org/project/legacyllm/)
+[![CI](https://github.com/asalontai/legacyllm/actions/workflows/ci.yml/badge.svg)](https://github.com/asalontai/legacyllm/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+**Your LLM code silently breaks when providers retire a model.** legacyllm detects deprecated model names (like `claude-3-opus-20240229`) across OpenAI, Anthropic, and Google Gemini and auto-swaps them to the current replacement — so your code keeps working without a rewrite.
 
 ```python
 import legacyllm
@@ -156,6 +161,16 @@ Every response returns the same shape regardless of provider:
 
 ---
 
+## vs. LiteLLM / OpenRouter
+
+legacyllm is **not** a full gateway or proxy. LiteLLM, OpenRouter, and Portkey are great if you want a heavyweight routing layer with load balancing, budgets, and a hosted endpoint.
+
+legacyllm does one narrow thing: it's a lightweight drop-in that **fixes deprecated model names automatically**, with almost no setup. If a provider retires the model your code hardcoded, legacyllm swaps it to the current replacement instead of letting your app break. No proxy to run, no config — just call `chat()`.
+
+Use legacyllm when you want your existing code to keep working as providers churn through models. Reach for a full gateway when you need routing infrastructure.
+
+---
+
 ## Helper commands
 
 ```python
@@ -192,10 +207,10 @@ This fetches the latest models from all 3 providers, updates `legacyllm/data/cur
 
 ## Contributing
 
-The deprecation index (`legacyllm/data/depricated.json`) needs ongoing maintenance as providers release and retire models. If you notice a missing deprecation:
+The deprecation index (`legacyllm/data/deprecated.json`) needs ongoing maintenance as providers release and retire models. If you notice a missing deprecation:
 
 1. Fork the repo
-2. Add the entry to `legacyllm/data/depricated.json` with `replacement` and `deprecated_on`
+2. Add the entry to `legacyllm/data/deprecated.json` with `replacement` and `deprecated_on`
 3. Run `pytest` to validate
 4. Submit a pull request
 

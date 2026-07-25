@@ -7,7 +7,7 @@ load_dotenv()
 
 _DATA = Path(__file__).parent / "data"
 _CURRENT_PATH = _DATA / "current_models.json"
-_DEPRECATED_PATH = _DATA / "depricated.json"
+_DEPRECATED_PATH = _DATA / "deprecated.json"
 
 # only keep text/chat models in the current-models pool used for auto-matching
 _NON_CHAT = (
@@ -70,7 +70,7 @@ def update():
             print(f"  [{provider}]")
             for model in model_list:
                 print(f"    - {model}")
-        print("\nReview and add to data/depricated.json with a replacement and deprecated_on date.")
+        print("\nReview and add to data/deprecated.json with a replacement and deprecated_on date.")
     else:
         print("No new deprecations detected.")
 
